@@ -1,0 +1,84 @@
+create DATABASE concesionaria;
+use concesionaria;
+
+CREATE TABLE IF NOT EXISTS usuarios(
+id_usuario int not null auto_increment,
+nombre varchar(50),
+apellido varchar(50),
+email varchar(50),
+clave varchar(80),
+primary key(id_usuario)
+);
+
+CREATE TABLE IF NOT EXISTS clientes(
+id_cliente int not null AUTO_INCREMENT,
+tipo varchar(50),
+id_usuario int,
+PRIMARY key(id_cliente),
+FOREIGN key(id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE IF NOT EXISTS empleados(
+id_empleado int not null AUTO_INCREMENT,
+sector varchar(50),
+cargo varchar(50),
+id_usuario int,
+PRIMARY key(id_empleado),
+FOREIGN key(id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+
+CREATE TABLE IF NOT EXISTS vehiculos(
+id_vehiculo int not null auto_increment,
+dominio varchar(20),
+modelo varchar(40),
+marca varchar(40),
+anio int,
+fecha_ingreso date,
+id_cliente int,
+primary key(id_vehiculo),
+FOREIGN key(id_cliente) REFERENCES clientes(id_cliente)
+);
+
+CREATE TABLE IF NOT EXISTS proveedores(
+id_proveedor int not null auto_increment,
+rubro varchar(50),
+id_usuario int,
+primary key(id_proveedor),
+FOREIGN key(id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+CREATE TABLE IF NOT EXISTS repuestos(
+id_repuesto int not null auto_increment,
+nombre varchar(50),
+precio int,
+stock int,
+id_proveedor int,
+primary key(id_repuesto),
+foreign key(id_proveedor) references proveedores(id_proveedor)
+);
+
+CREATE TABLE IF NOT EXISTS presupuestos(
+id_presupuesto int not null auto_increment,
+tipo_trabajo varchar(50),
+detalle varchar(255),
+importe_total int,
+fecha date,
+id_vehiculo int,
+id_empleado int,
+primary key(id_presupuesto),
+foreign key(id_vehiculo) references vehiculos(id_vehiculo),
+foreign key(id_empleado) references empleados(id_empleado)
+);
+
+CREATE TABLE IF NOT EXISTS facturaciones(
+id_factura int not null auto_increment,
+fecha date,
+precio_total int,
+cantidad int,
+id_repuesto int,
+id_presupuesto int,
+primary key(id_factura),
+foreign key(id_repuesto) references repuestos(id_repuesto),
+foreign key(id_presupuesto) references presupuestos(id_presupuesto)
+);

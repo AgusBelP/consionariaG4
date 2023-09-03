@@ -1,0 +1,12 @@
+PORT = Puerto de la aplicación
+DB_HOST_DEV = host local para pruebas
+DB_HOST_PROD = host en la nube
+
+DB_USER_DEV = usuario local
+DB_USER_PROD= usuario en la nube
+
+DB_PASS_DEV= ""
+DB_PASS_PROD= clave en la nueba
+
+DB_NAME_DEV= nombre del esquema 
+DB_NAME_PROD=nombre del esquema 
