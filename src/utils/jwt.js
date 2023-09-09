@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const authController = require('../controllers/auth.controller');
 require('dotenv').config();
 
@@ -8,8 +9,10 @@ async function create_token(req,res) {
     const email = req.body.email;
     const pass = req.body.password;
     const user = await authController.userAuthEmail(email)
+    console.log(pass);
+    console.log(user[0].clave);
             
-    if(user[0] != undefined && pass === user[0].clave){
+    if(user[0] != undefined && bcrypt.compareSync(pass,user[0].clave) === true){
         const payload = { sub: user[0].id_usuario};
         const token = jwt.sign(payload, secret, { expiresIn: '10min' });
         res.json({
