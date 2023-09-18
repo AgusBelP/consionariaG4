@@ -33,6 +33,19 @@ class VehiculoModel {
     }
   }
 
+  /**  OBTENER UNO POR DOMINIO  **/
+
+  async getByDom(dominio) {
+    try {
+      return await this.knexDB
+        .from(this.tableName)
+        .select("id_vehiculo")
+        .where({ dominio: dominio });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   /**  GUARDAR UN REGISTRO  **/
 
   async save(obj) {

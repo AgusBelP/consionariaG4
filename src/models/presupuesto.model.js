@@ -37,7 +37,7 @@ class PresupuestoModel {
 
   async save(obj) {
     try {
-      return await this.knexDB(this.tableName).insert(obj);
+      return await this.knexDB(this.tableName).insert(obj).select("id_presupuesto");
     } catch (error) {
       throw error;
     }

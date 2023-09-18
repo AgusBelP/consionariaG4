@@ -33,6 +33,19 @@ class EmpleadoModel {
     }
   }
 
+   /**  OBTENER UNO POR ID DE USUARIO  **/
+
+  async getByIdUser(id) {
+    try {
+      return await this.knexDB
+        .from(this.tableName)
+        .select("id_empleado")
+        .where({ id_usuario: id });
+    } catch (error) {
+      throw error;
+    }
+  }
+
   /**  GUARDAR UN REGISTRO  **/
 
   async save(obj) {

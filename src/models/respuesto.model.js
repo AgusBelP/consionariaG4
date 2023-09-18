@@ -27,7 +27,20 @@ class RepuestoModel {
       return await this.knexDB
         .from(this.tableName)
         .select("*")
-        .where({ id: id });
+        .where({ id_repuesto: id });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+   /**  OBTENER UNO POR TIPO DE REPUESTO  **/
+
+  async getByType(type) {
+    try {
+      return await this.knexDB
+        .from(this.tableName)
+        .select("*")
+        .where({ tipo_repuesto: type });
     } catch (error) {
       throw error;
     }
