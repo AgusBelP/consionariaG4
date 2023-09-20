@@ -11,7 +11,7 @@ const checkRole = (roles) => (req,res,next) => {
 
         next();
     } catch (error) {
-        console.log("entré al error");
+        
         return res.json({
                 message: "Rol no verificado"
             })
